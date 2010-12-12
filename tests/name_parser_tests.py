@@ -6,7 +6,7 @@ sys.path.append(os.path.abspath('..'))
 
 from sickbeard.name_parser import parser
 
-DEBUG = VERBOSE = False
+DEBUG = VERBOSE = True
 
 simple_test_cases = {
               'standard': {
@@ -17,6 +17,8 @@ simple_test_cases = {
               'Mr. Show Name - S01E02-03 - My Ep Name': parser.ParseResult(None, 'Mr. Show Name', 1, [2,3], 'My Ep Name'),
               'Show.Name.S01.E02.E03': parser.ParseResult(None, 'Show Name', 1, [2,3]),
               'Show.Name-0.2010.S01E02.Source.Quality.Etc-Group': parser.ParseResult(None, 'Show Name-0 2010', 1, [2], 'Source.Quality.Etc', 'Group'),
+              'S01E02 Ep Name': parser.ParseResult(None, None, 1, [2], 'Ep Name'),
+              'Show Name - S06E01 - 2009-12-20 - Ep Name': parser.ParseResult(None, 'Show Name', 6, [1], '2009-12-20 - Ep Name'),
               },
               
               'fov': {
@@ -24,6 +26,7 @@ simple_test_cases = {
               'Show Name - 1x02 - My Ep Name': parser.ParseResult(None, 'Show Name', 1, [2], 'My Ep Name'),
               'Show_Name.1x02x03x04.Source_Quality_Etc-Group': parser.ParseResult(None, 'Show Name', 1, [2,3,4], 'Source_Quality_Etc', 'Group'),
               'Show Name - 1x02-03-04 - My Ep Name': parser.ParseResult(None, 'Show Name', 1, [2,3,4], 'My Ep Name'),
+              '1x02 Ep Name': parser.ParseResult(None, None, 1, [2], 'Ep Name'),
               },
 
               'standard_repeat': {
@@ -84,6 +87,10 @@ combination_test_cases = [
                           ('MythBusters.S08E16.720p.HDTV.x264-aAF\\aaf-mb.s08e16.720p.mkv',
                            parser.ParseResult(None, 'MythBusters', 8, [16], '720p.HDTV.x264', 'aAF'),
                            ['standard']),
+                           
+                           ('/home/drop/storage/TV/Terminator The Sarah Connor Chronicles/Season 2/S02E06 The Tower is Tall, But the Fall is Short.mkv',
+                            parser.ParseResult(None, None, 2, [6], 'The Tower is Tall, But the Fall is Short'),
+                            ['standard']),
                           
                           ]
 
