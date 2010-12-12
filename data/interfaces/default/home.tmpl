@@ -144,7 +144,7 @@
 
     \$("#showListTable").tablesorter({
         sortList: sortList,
-        widgets: ['cookie'],
+        widgets: ['cookie','zebra'],
         headers: {
             0: { sorter: 'nextAirDate'},
             1: { sorter: 'loadingNames'},
@@ -156,15 +156,7 @@
 
 });
 </script>
-<style>
-.ui-progressbar {
-   height:1.25em;
-   text-align:left;
-}
-td {
-   padding: 3px;
-}
-</style>
+
 <table id="showListTable" class="sickbeardTable tablesorter">
 
   <thead><tr><th>Next Ep</th><th>Show</th><th>Network</th><th>Quality</th><th>Downloads</th><th>Active</th><th>Status</th></tr></thead>
