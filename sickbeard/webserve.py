@@ -1189,7 +1189,7 @@ class NewHomeAddShows:
 
         # if we got a TVDB ID then make a show out of it
         sickbeard.showQueueScheduler.action.addShow(int(whichSeries), showToAdd)
-        ui.flash.message('Show added', 'Adding the specified show into '+showToAdd)
+        ui.flash.message('Show added', 'Adding the specified show into '+ repr(showToAdd))
         # no need to display anything now that we added the show, so continue on to the next show
         return self.addShows(showDirs)
 
@@ -1218,7 +1218,7 @@ class NewHomeAddShows:
 
         # if the dir we're given doesn't exist and we can't create it then skip it
         if not helpers.makeDir(showToAdd):
-            ui.flash.error("Warning", "Unable to create dir "+showToAdd+", skipping")
+            ui.flash.error("Warning", "Unable to create dir "+repr(showToAdd)+", skipping")
             # recursively continue on our way, encoding the input as though we came from the web form
             return self.addShows([urllib.quote_plus(x.encode('utf-8')) for x in restOfShowDirs])
 
@@ -1241,7 +1241,7 @@ class NewHomeAddShows:
             # if we got a TVDB ID then make a show out of it
             if tvdb_id:
                 sickbeard.showQueueScheduler.action.addShow(tvdb_id, showToAdd)
-                ui.flash.message('Show added', 'Auto-added show from tvshow.nfo in '+showToAdd)
+                ui.flash.message('Show added', 'Auto-added show from tvshow.nfo in '+ repr(showToAdd))
                 # no need to display anything now that we added the show, so continue on to the next show
                 return self.addShows([urllib.quote_plus(x.encode('utf-8')) for x in restOfShowDirs])
 
