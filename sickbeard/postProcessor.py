@@ -300,6 +300,8 @@ class PostProcessor(object):
         Returns a (tvdb_id, season, [episodes]) tuple. The first two may be None and episodes may be []
         if none were found.
         """
+
+        logger.log(u"Analyzing name "+repr(name))
     
         to_return = (None, None, [])
     
@@ -320,10 +322,14 @@ class PostProcessor(object):
     
         # do a scene reverse-lookup to get a list of all possible names
         name_list = sceneHelpers.sceneToNormalShowNames(parse_result.series_name)
+
+        if not name_list:
+            return (None, season, episodes)
         
         def _finalize(parse_result):
             self.release_group = parse_result.release_group
-            self.is_proper = re.search('(^|[\. _-])(proper|repack)([\. _-]|$)', parse_result.extra_info, re.I) != None
+            if parse_result.extra_info:
+                self.is_proper = re.search('(^|[\. _-])(proper|repack)([\. _-]|$)', parse_result.extra_info, re.I) != None
         
         # for each possible interpretation of that scene name
         for cur_name in name_list:
@@ -497,6 +503,8 @@ class PostProcessor(object):
         if ep_quality != common.Quality.UNKNOWN:
             logger.log(self.file_name+u" looks like it has quality "+common.Quality.qualityStrings[ep_quality]+", using that", logger.DEBUG)
             return ep_quality
+        
+        return ep_quality
     
     def _run_extra_scripts(self, ep_obj):
         for curScriptName in sickbeard.EXTRA_SCRIPTS:
