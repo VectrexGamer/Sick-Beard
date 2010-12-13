@@ -58,55 +58,66 @@
 </span>
 #end if
 
-#if $sickbeard.NEWEST_VERSION_STRING:
-<br />
-<div class="message ui-state-highlight ui-corner-all">
-    <p><span class="ui-icon ui-icon-alert"></span>$sickbeard.NEWEST_VERSION_STRING</a></p>
-</div>
-#end if
-
-
 <h1>#if $varExists('header') then $header else $title#</h1>
+
 
 <script>
 \$(document).ready(function(){
 \$("#notification-container").notify();
 
-#for $curMessage in $flash.messages():
-\$("#notification-container").notify("create", 1, {
-	    title: '$curMessage[0]',
-		message: '$sbRoot/config.ini'
-});
-#end for
-
-#for $curError in $flash.errors():
-\$("#notification-container").notify("create", 1, {
-	    title: '$curError[0]',
-		message: '$sbRoot/config.ini'
+#if $sickbeard.NEWEST_VERSION_STRING:
+\$("#notification-container").notify("create", 3, {
+	    title: "Update Available"
 },{
     expires: false,
     speed: 300
 });
+#end if
+
+#for $curMessage in $flash.messages():
+\$("#notification-container").notify("create", #if $curMessage[1] then "1" else "0"#, {
+	    title: "$curMessage[0]",
+		text: "$curMessage[1]"
+});
 #end for
+
+#for $curError in $flash.errors():
+\$("#notification-container").notify("create", 2, {
+	    title: "$curError[0]",
+		text: "$curError[1]"
+},{
+    expires: false,
+    speed: 300
+});
+#end for	
 });
 </script>
 
 <div id="notification-container">
- 
 	<div class="ui-notify-message ui-notify-message-style">
 			<a href="#" class="ui-notify-close ui-notify-cross">x</a>
-			<div style="float: left; margin: 0pt 10px 0pt 0pt;"><img alt="warning" src="$sbRoot/images/alert.png"></div>
+			<div style="float: left; padding-right: 10px; margin-top: -5px;"><img alt="warning" src="$sbRoot/images/check32.png"></div>
 			<h1 style="border: 0px;">#{title}</h1>
-			<p>#{message}</p>
+			<p>#{text}</p>
 	</div>
- 
-	<div class="ui-state-error">
-		<a class="ui-notify-close" href="#">
-			<span class="ui-icon ui-icon-close" style="float:right"></span>
-		</a>
-		<div style="float: left; margin: 0pt 10px 0pt 0pt;"><img alt="error" src="$sbRoot/images/alert.png"></div>
- 		<h1 style="border: 0px;">#{title}</h1>
-		<p>#{message}</p>
+	<div class="ui-notify-message ui-notify-message-style">
+			<a href="#" class="ui-notify-close ui-notify-cross">x</a>
+			<div style="float: left; padding-right: 10px; margin-top: -5px;"><img alt="warning" src="$sbRoot/images/check48.png"></div>
+			<h1 style="border: 0px;">#{title}</h1>
+			<p>#{text}</p>
 	</div>
- 
+
+	<div class="ui-notify-message ui-notify-message-style">
+			<a href="#" class="ui-notify-close ui-notify-cross">x</a>	
+			<div style="float: left; padding-right: 10px; margin-top: -5px;"><img alt="warning" src="$sbRoot/images/alert48.png"></div>
+			<h1 style="border: 0px;">#{title}</h1>
+			<p>#{text}</p>
+	</div> 	
+	
+	<div class="ui-notify-message ui-notify-message-style" style="margin-left: -130px;">
+			<a href="#" class="ui-notify-close ui-notify-cross">x</a>	
+			<div style="float: left; padding-right: 10px; margin-top: -5px;"><img alt="warning" src="$sbRoot/images/alert48.png"></div>
+			<h1 style="border: 0px;">#{title}</h1>
+			<p>$sickbeard.NEWEST_VERSION_STRING</p>
+	</div> 	
 </div>

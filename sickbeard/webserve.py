@@ -159,7 +159,7 @@ class ManageSearches:
         if result:
             logger.log(u"Search forced")
             ui.flash.message('Episode search started',
-                          'Note: RSS feeds may not be updated if they have been retrieved too recently')
+                          'Note: RSS feeds may not be updated if retrieved recently')
 
         redirect("/manage/manageSearches")
 
@@ -602,7 +602,7 @@ class ConfigGeneral:
             ui.flash.error('Error(s) Saving Configuration',
                         '<br />\n'.join(results))
         else:
-            ui.flash.message('Configuration Saved')
+            ui.flash.message('Configuration Saved', repr( os.path.join(sickbeard.PROG_DIR, 'config.ini') ) )
 
         redirect("/config/general/")
 
@@ -777,7 +777,7 @@ class ConfigEpisodeDownloads:
             ui.flash.error('Error(s) Saving Configuration',
                         '<br />\n'.join(results))
         else:
-            ui.flash.message('Configuration Saved')
+            ui.flash.message('Configuration Saved', repr( os.path.join(sickbeard.PROG_DIR, 'config.ini') ) )
 
         redirect("/config/episodedownloads/")
 
@@ -950,7 +950,7 @@ class ConfigProviders:
             ui.flash.error('Error(s) Saving Configuration',
                         '<br />\n'.join(results))
         else:
-            ui.flash.message('Configuration Saved')
+            ui.flash.message('Configuration Saved', repr( os.path.join(sickbeard.PROG_DIR, 'config.ini') ) )
 
         redirect("/config/providers/")
 
@@ -1050,7 +1050,7 @@ class ConfigNotifications:
             ui.flash.error('Error(s) Saving Configuration',
                         '<br />\n'.join(results))
         else:
-            ui.flash.message('Configuration Saved')
+            ui.flash.message('Configuration Saved', repr( os.path.join(sickbeard.PROG_DIR, 'config.ini') ) )
 
         redirect("/config/notifications/")
 
