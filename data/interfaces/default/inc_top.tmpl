@@ -76,15 +76,15 @@
 
 #for $curMessage in $flash.messages():
 \$("#notification-container").notify("create", #if $curMessage[1] then "1" else "0"#, {
-	    title: "$curMessage[0]",
-		text: "$curMessage[1]"
+	    title: "$curMessage[0].replace('\\','\\\\').replace('"','\\"')",
+		text: "$curMessage[1].replace('\\','\\\\').replace('"','\\"')"
 });
 #end for
 
 #for $curError in $flash.errors():
 \$("#notification-container").notify("create", 2, {
-	    title: "$curError[0]",
-		text: "$curError[1]"
+	    title: "$curError[0].replace('\\','\\\\').replace('"','\\"')",
+		text: "$curError[1].replace('\\','\\\\').replace('"','\\"')"
 },{
     expires: false,
     speed: 300

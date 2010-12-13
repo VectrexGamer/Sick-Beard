@@ -436,7 +436,7 @@ class History:
 
         myDB = db.DBConnection()
         myDB.action("DELETE FROM history WHERE date < "+str((datetime.datetime.today()-datetime.timedelta(days=30)).strftime(history.dateFormat)))
-        ui.flash.message('Removed all history entries greater than 30 days old')
+        ui.flash.message('Removed history entries greater than 30 days old')
         redirect("/history")
 
 
