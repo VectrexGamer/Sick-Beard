@@ -77,7 +77,6 @@ $(document).ready(function(){
 	//initalize to show the div
 	$(this).showHideMetadata();	
 	// -- end of metadata options div toggle code --
-
     
     $('.metadata_checkbox').click(function(){
         $(this).refreshMetadataConfig();
