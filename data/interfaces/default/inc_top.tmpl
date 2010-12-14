@@ -65,12 +65,11 @@
 \$(document).ready(function(){
 \$("#notification-container").notify();
 
-#if $sickbeard.NEWEST_VERSION_STRING:
+#if $sickbeard.VERSION_NOTIFY or $sickbeard.NEWEST_VERSION_STRING:
 \$("#notification-container").notify("create", 3, {
 	    title: "Update Available"
 },{
-    expires: false,
-    speed: 300
+    expires: 10000
 });
 #end if
 
@@ -86,8 +85,7 @@
 	    title: "$curError[0].replace('\\','\\\\').replace('"','\\"')",
 		text: "$curError[1].replace('\\','\\\\').replace('"','\\"')"
 },{
-    expires: false,
-    speed: 300
+    expires: false
 });
 #end for	
 });
@@ -116,7 +114,7 @@
 	
 	<div class="ui-notify-message ui-notify-message-style" style="margin-left: -130px;">
 			<a href="#" class="ui-notify-close ui-notify-cross">x</a>	
-			<div style="float: left; padding-right: 10px; margin-top: -5px;"><img alt="warning" src="$sbRoot/images/alert48.png"></div>
+			<div style="float: left; padding-right: 10px; margin-top: -5px;"><img alt="warning" src="$sbRoot/images/update48.png"></div>
 			<h1 style="border: 0px;">#{title}</h1>
 			<p>$sickbeard.NEWEST_VERSION_STRING</p>
 	</div> 	
