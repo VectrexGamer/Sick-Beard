@@ -12,14 +12,13 @@
 <div id="outerWrapper">
   <div id="listingWrapper">
 
-
 	#set $cur_segment = None
 	#set $too_late_header = False
 	#set $missed_header = False
 	#set $show_div = ""
 
 	#for $cur_result in $sql_results:
-        #if False and int($cur_result["paused"]):
+        #if int($cur_result["paused"]):
             #continue
         #end if
         
